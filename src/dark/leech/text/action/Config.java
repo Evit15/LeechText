@@ -211,6 +211,7 @@
 /* 209 */     Matcher m = r.matcher(text);
 /* 210 */     while (m.find())
 /* 211 */       imgList.add(m.group(1)); 
+/* 210 */     chapter.setDownloadImgSucess(true);
 /* 212 */     for (int i = 0; i < imgList.size(); i++) {
 /* 213 */       String imgPath = imgList.get(i);
 /* 214 */       if (imgPath.startsWith("http")) {
@@ -218,14 +219,21 @@
 				  if(img.contains("?")) {
 					  img = img.substring(0, img.lastIndexOf("?"));
 				  }
+				  String ext = img;
 /* 217 */         img = this.path + "/data/Images/" + chapter.getId() + "_" + Integer.toString(i) + img;
 /* 218 */         FileUtils.url2file(imgList.get(i), img);
 				  if(FileUtils.fileExist(img)) {
-					  text = text.replace(imgPath, "../Images/" + chapter.getId() + "_" + Integer.toString(i) + img).replace("\">", "\"/>");  
+					  text = text.replace(imgPath, "../Images/" + chapter.getId() + "_" + Integer.toString(i) + ext).replace("\">", "\"/>");  
 				  }else {
 					  chapter.setDownloadImgSucess(false);
 				  }
-/*     */       } 
+/*     */       } else
+				{
+					String img = this.path + "/data/Images/" + imgPath;
+					if(!FileUtils.fileExist(img)) {
+						chapter.setDownloadImgSucess(false);  
+					  }
+				}
 /* 220 */     }  FileUtils.string2file(text, this.path + "/raw/" + chapter.getId() + ".txt");
 /*     */   }
 /*     */   

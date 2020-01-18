@@ -72,6 +72,7 @@
 /* 72 */     obj.put("part", chapter.getPartName());
 /* 73 */     obj.put("chap", chapter.getChapName());
 /* 74 */     obj.put("url", chapter.getUrl());
+/* 74 */     obj.put("img", chapter.isImageChapter());
 /* 75 */     return obj;
 /*    */   }
 /*    */   
@@ -82,6 +83,7 @@
 /* 82 */     chapter.setPartName(jsonObject.getString("part"));
 /* 83 */     chapter.setChapName(jsonObject.getString("chap"));
 /* 84 */     chapter.setUrl(jsonObject.getString("url"));
+/* 84 */     chapter.setImageChapter(jsonObject.getBoolean("img"));
 /* 85 */     chapter.setCompleted(true);
 /* 86 */     return chapter;
 /*    */   }
