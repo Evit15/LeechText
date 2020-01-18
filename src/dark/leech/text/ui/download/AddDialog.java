@@ -22,6 +22,8 @@
 /*     */ import java.awt.Component;
 /*     */ import java.awt.event.ActionEvent;
 /*     */ import java.awt.event.ActionListener;
+import java.net.MalformedURLException;
+import java.net.URL;
 /*     */ import java.util.ArrayList;
 /*     */ import java.util.List;
 /*     */ import javax.swing.JLabel;
@@ -205,9 +207,18 @@
 /*     */         return;
 /*     */       } 
 /* 209 */       String savePath = SyntaxUtils.xoaDau(this.tfName.getText());
-/*     */ 
-/*     */       
-/* 212 */       savePath = savePath.replaceAll("[^a-zA-Z0-9_]", "_").replace("\"", "").trim();
+				savePath = savePath.replaceAll("[^a-zA-Z0-9_]", "_").replace("\"", "").trim();
+/*     */ 		String host = "";
+	/*     */   try {
+					URL url = new URL(this.url);
+					host = url.getHost();
+				} catch (MalformedURLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}   
+				if(!host.isEmpty()) {
+					savePath = host + "_" + savePath;
+				}
 /* 213 */       savePath = FileUtils.validate(SettingUtils.WORKPATH + "/output/" + savePath);
 /* 214 */       this.properties.setSavePath(savePath);
 /* 215 */       this.properties.setUrl(this.url);

@@ -37,7 +37,7 @@
 /* 37 */       this.chapter.setEmpty(false);
 /* 38 */       if (this.text == null || this.text.length() == 0) {
 /* 39 */         this.chapter.setError(true);
-/* 40 */       } else if (this.text.length() < 10000) {
+/* 40 */       } else if (this.text.length() < 20000) {
 /* 41 */         if ((this.text.split("<img ")).length > 1)
 /* 42 */         { this.chapter.setImageChapter(true); }
 /* 43 */         else { this.chapter.setEmpty(true); } 
