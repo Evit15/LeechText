@@ -58,8 +58,10 @@
 /*  58 */       if (((Chapter)this.chapList.get(index)).getPartName().length() != 0) {
 /*  59 */         part.add(Integer.valueOf(index));
 /*     */         break;
-/*     */       } 
-/*  62 */       if (RegexUtils.find(((Chapter)this.chapList.get(index)).getChapName(), "(Ch..ng\\s*\\d+)", 1).length() != 0) {
+/*     */       }
+				System.out.println(((Chapter)this.chapList.get(index)).getChapName());
+				String tmp = RegexUtils.find(((Chapter)this.chapList.get(index)).getChapName(), "(Ch..ng\\s*\\d+)", 1);
+/*  62 */       if (tmp != null && tmp.length() != 0) {
 /*  63 */         part.add(Integer.valueOf(index));
 /*     */         break;
 /*     */       } 

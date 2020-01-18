@@ -196,12 +196,15 @@
 /*     */       try {
 /* 198 */         downloadImg(this.chapList.get(i));
 /* 199 */         this.tableListener.updateData(i, this.chapList.get(i));
-/* 200 */       } catch (Exception exception) {}
+/* 200 */       } catch (Exception exception) {
+				System.out.println(exception);
+				}
 /*     */     } 
 /*     */   }
 /*     */ 
 /*     */   
 /*     */   private void downloadImg(Chapter chapter) {
+				System.out.println("Download anh chap " + chapter.getId());
 /* 206 */     String text = FileUtils.file2string(this.path + "/raw/" + chapter.getId() + ".txt");
 /* 207 */     ArrayList<String> imgList = new ArrayList<>();
 /* 208 */     Pattern r = Pattern.compile("<img.*?src=\"(.*?)\"", 8);
@@ -212,6 +215,9 @@
 /* 213 */       String imgPath = imgList.get(i);
 /* 214 */       if (imgPath.startsWith("http")) {
 /* 215 */         String img = imgPath.substring(imgPath.lastIndexOf("."), imgPath.length()).toLowerCase();
+				  if(img.contains("?")) {
+					  img = img.substring(0, img.lastIndexOf("?"));
+				  }
 /* 216 */         text = text.replace(imgPath, "../Images/" + chapter.getId() + "_" + Integer.toString(i) + img).replace("\">", "\"/>");
 /* 217 */         img = this.path + "/data/Images/" + chapter.getId() + "_" + Integer.toString(i) + img;
 /* 218 */         FileUtils.url2file(imgList.get(i), img);
