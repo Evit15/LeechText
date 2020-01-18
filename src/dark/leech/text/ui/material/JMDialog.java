@@ -1,18 +1,24 @@
 /*     */ package dark.leech.text.ui.material;
+import dark.leech.text.image.GaussianBlurFilter;
 /*     */ import dark.leech.text.listeners.BlurListener;
 /*     */ import dark.leech.text.listeners.ChangeListener;
 /*     */ import dark.leech.text.ui.Animation;
 /*     */ import dark.leech.text.ui.main.App;
 /*     */ import dark.leech.text.util.AppUtils;
 /*     */ import dark.leech.text.util.GraphicsUtils;
+
+import java.awt.AlphaComposite;
 /*     */ import java.awt.Color;
 /*     */ import java.awt.Container;
 /*     */ import java.awt.Graphics;
 /*     */ import java.awt.Graphics2D;
+import java.awt.LayoutManager;
 /*     */ import java.awt.Point;
 /*     */ import java.awt.RenderingHints;
+import java.awt.Toolkit;
 /*     */ import java.awt.geom.RoundRectangle2D;
 /*     */ import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
 /*     */ import java.awt.image.RescaleOp;
 /*     */ import javax.swing.JDialog;
 /*     */ import javax.swing.JRootPane;
@@ -26,7 +32,7 @@
 /*     */   private Color borderColor;
 /*     */   
 /*     */   public JMDialog() {
-/*  29 */     super((Frame)App.getMain());
+/*  29 */     super(App.getMain());
 /*  30 */     this.blurListener = (BlurListener)App.getMain();
 /*     */   }
 /*     */   

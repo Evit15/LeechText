@@ -12,9 +12,11 @@
 /*     */ import java.util.concurrent.TimeUnit;
 /*     */ import javax.swing.JComponent;
 /*     */ import org.jdesktop.core.animation.timing.Animator;
+import org.jdesktop.core.animation.timing.Interpolator;
 /*     */ import org.jdesktop.core.animation.timing.TimingSource;
 /*     */ import org.jdesktop.core.animation.timing.TimingTarget;
 /*     */ import org.jdesktop.core.animation.timing.TimingTargetAdapter;
+import org.jdesktop.core.animation.timing.interpolators.AccelerationInterpolator;
 /*     */ import org.jdesktop.swing.animation.timing.sources.SwingTimerTimingSource;
 /*     */ 
 /*     */ public class RippleEffect {

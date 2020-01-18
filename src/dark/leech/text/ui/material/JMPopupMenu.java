@@ -1,4 +1,5 @@
 /*    */ package dark.leech.text.ui.material;
+import java.awt.AlphaComposite;
 /*    */ import java.awt.Color;
 /*    */ import java.awt.Component;
 /*    */ import java.awt.Dimension;
@@ -13,6 +14,8 @@
 /*    */ import javax.swing.SwingUtilities;
 /*    */ import javax.swing.border.Border;
 /*    */ import javax.swing.border.LineBorder;
+
+import dark.leech.text.util.ColorUtils;
 /*    */ 
 /*    */ public class JMPopupMenu extends JPopupMenu {
 /*    */   private static final int OFFSET = 4;

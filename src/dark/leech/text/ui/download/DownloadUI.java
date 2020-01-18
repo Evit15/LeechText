@@ -1,6 +1,7 @@
 /*     */ package dark.leech.text.ui.download;
 /*     */ import dark.leech.text.action.History;
 /*     */ import dark.leech.text.listeners.AddListener;
+import dark.leech.text.listeners.RemoveListener;
 /*     */ import dark.leech.text.models.Properties;
 /*     */ import dark.leech.text.ui.material.JMPanel;
 /*     */ import dark.leech.text.ui.material.JMScrollPane;
@@ -13,6 +14,7 @@
 /*     */ import java.awt.dnd.DropTarget;
 /*     */ import java.awt.dnd.DropTargetDragEvent;
 /*     */ import java.awt.dnd.DropTargetDropEvent;
+import java.awt.dnd.DropTargetEvent;
 /*     */ import java.awt.dnd.DropTargetListener;
 /*     */ import java.io.File;
 /*     */ import java.util.List;

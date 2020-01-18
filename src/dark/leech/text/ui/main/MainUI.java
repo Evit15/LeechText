@@ -1,6 +1,8 @@
 /*     */ package dark.leech.text.ui.main;
+import dark.leech.text.image.GaussianBlurFilter;
 /*     */ import dark.leech.text.listeners.AddListener;
 /*     */ import dark.leech.text.listeners.BlurListener;
+import dark.leech.text.plugin.PluginManager;
 /*     */ import dark.leech.text.ui.Animation;
 /*     */ import dark.leech.text.ui.button.CircleButton;
 /*     */ import dark.leech.text.ui.button.CloseButton;

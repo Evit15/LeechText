@@ -1,4 +1,5 @@
 /*     */ package dark.leech.text.ui.material;
+import dark.leech.text.util.ColorUtils;
 /*     */ import dark.leech.text.util.FontUtils;
 /*     */ import dark.leech.text.util.SafePropertySetter;
 /*     */ import dark.leech.text.util.SettingUtils;
@@ -9,14 +10,22 @@
 /*     */ import java.awt.RenderingHints;
 /*     */ import java.awt.event.FocusEvent;
 /*     */ import java.awt.event.KeyEvent;
+import java.util.concurrent.TimeUnit;
+
 /*     */ import javax.swing.JComponent;
+import javax.swing.JLabel;
 /*     */ import javax.swing.JTextField;
+import javax.swing.border.Border;
 /*     */ import javax.swing.text.DefaultCaret;
 /*     */ import net.java.balloontip.BalloonTip;
 /*     */ import net.java.balloontip.styles.BalloonTipStyle;
 /*     */ import net.java.balloontip.styles.MinimalBalloonStyle;
+import net.java.balloontip.utils.TimingUtils;
+
 /*     */ import org.jdesktop.core.animation.timing.Animator;
+import org.jdesktop.core.animation.timing.Interpolator;
 /*     */ import org.jdesktop.core.animation.timing.TimingSource;
+import org.jdesktop.core.animation.timing.interpolators.SplineInterpolator;
 /*     */ import org.jdesktop.swing.animation.timing.sources.SwingTimerTimingSource;
 /*     */ 
 /*     */ public class JMTextField extends JTextField {

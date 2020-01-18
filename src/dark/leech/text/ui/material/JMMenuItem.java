@@ -2,10 +2,12 @@
 /*    */ import dark.leech.text.util.ColorUtils;
 /*    */ import dark.leech.text.util.FontUtils;
 /*    */ import java.awt.Color;
+import java.awt.Dimension;
 /*    */ import java.awt.Graphics;
 /*    */ import java.awt.Graphics2D;
 /*    */ import java.awt.GridLayout;
 /*    */ import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 /*    */ 
 /*    */ public class JMMenuItem extends JMenuItem {
 /*    */   public JMMenuItem(String text) {

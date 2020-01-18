@@ -21,7 +21,7 @@
 /* 21 */     return string2table(object.toString());
 /*    */   }
 /*    */   private static LuaValue json2table(JSONObject obj) {
-/*    */     LuaTable luaTable;
+/*    */     LuaTable luaTable =null;
 /* 25 */     LuaValue result = LuaValue.NIL;
 /* 26 */     if (obj != null) {
 /* 27 */       luaTable = new LuaTable();
@@ -50,7 +50,7 @@
 /* 50 */     return luaTable;
 /*    */   }
 /*    */   private static LuaValue array2table(JSONArray obj) {
-/*    */     LuaTable luaTable;
+/*    */     LuaTable luaTable = null;
 /* 54 */     LuaValue result = LuaValue.NIL;
 /*    */     
 /* 56 */     if (obj != null) {
