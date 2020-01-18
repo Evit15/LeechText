@@ -1,134 +1,140 @@
-package dark.leech.text.models;
-/**
- * Code by Darkrai on 8/21/2016.
+/*     */ package dark.leech.text.models;
+/*     */ 
+/*     */ import java.util.List;
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */ public class Properties
+/*     */ {
+/*     */   private String name;
+/*     */   private String author;
+/*     */   private String url;
+/*     */   private String cover;
+/*     */   private List<Chapter> chapList;
+/*     */   private List<Pager> pageList;
+/*     */   private boolean forum;
+/*     */   private int size;
+/*     */   private String savePath;
+/*     */   private String gioiThieu;
+/*     */   private boolean addGt;
+/*  21 */   private String charset = "UTF-8";
+/*     */   private String[] urlList;
+/*     */   
+/*     */   public boolean isAddGt() {
+/*  25 */     return this.addGt;
+/*     */   }
+/*     */   
+/*     */   public void setAddGt(boolean addGt) {
+/*  29 */     this.addGt = addGt;
+/*     */   }
+/*     */   
+/*     */   public String getGioiThieu() {
+/*  33 */     return this.gioiThieu;
+/*     */   }
+/*     */   
+/*     */   public void setGioiThieu(String gioiThieu) {
+/*  37 */     this.gioiThieu = gioiThieu;
+/*     */   }
+/*     */   
+/*     */   public String getSavePath() {
+/*  41 */     return this.savePath;
+/*     */   }
+/*     */   
+/*     */   public void setSavePath(String savePath) {
+/*  45 */     this.savePath = savePath;
+/*     */   }
+/*     */   
+/*     */   public int getSize() {
+/*  49 */     return this.size;
+/*     */   }
+/*     */   
+/*     */   public void setSize(int size) {
+/*  53 */     this.size = size;
+/*     */   }
+/*     */   
+/*     */   public String getName() {
+/*  57 */     return this.name;
+/*     */   }
+/*     */   
+/*     */   public void setName(String name) {
+/*  61 */     this.name = name;
+/*     */   }
+/*     */   
+/*     */   public String getAuthor() {
+/*  65 */     return this.author;
+/*     */   }
+/*     */   
+/*     */   public void setAuthor(String author) {
+/*  69 */     this.author = author;
+/*     */   }
+/*     */   
+/*     */   public String getUrl() {
+/*  73 */     return this.url;
+/*     */   }
+/*     */   
+/*     */   public void setUrl(String url) {
+/*  77 */     this.url = url;
+/*     */   }
+/*     */   
+/*     */   public String getCover() {
+/*  81 */     return this.cover;
+/*     */   }
+/*     */   
+/*     */   public void setCover(String cover) {
+/*  85 */     this.cover = cover;
+/*     */   }
+/*     */   
+/*     */   public void setCover(String cover, String page) {
+/*  89 */     if (cover == null)
+/*  90 */       return;  if (cover.startsWith("http"))
+/*  91 */     { this.cover = cover; }
+/*  92 */     else { this.cover = page + cover; }
+/*     */   
+/*     */   }
+/*     */   public boolean isForum() {
+/*  96 */     return this.forum;
+/*     */   }
+/*     */   
+/*     */   public void setForum(boolean forum) {
+/* 100 */     this.forum = forum;
+/*     */   }
+/*     */   
+/*     */   public List<Chapter> getChapList() {
+/* 104 */     return this.chapList;
+/*     */   }
+/*     */   
+/*     */   public void setChapList(List<Chapter> chapList) {
+/* 108 */     this.chapList = chapList;
+/*     */   }
+/*     */   
+/*     */   public List<Pager> getPageList() {
+/* 112 */     return this.pageList;
+/*     */   }
+/*     */   
+/*     */   public void setPageList(List<Pager> pageList) {
+/* 116 */     this.pageList = pageList;
+/*     */   }
+/*     */   
+/*     */   public String getCharset() {
+/* 120 */     return this.charset;
+/*     */   }
+/*     */   
+/*     */   public void setCharset(String charset) {
+/* 124 */     this.charset = charset;
+/*     */   }
+/*     */   
+/*     */   public String[] getUrlList() {
+/* 128 */     return this.urlList;
+/*     */   }
+/*     */   
+/*     */   public void setUrlList(String[] urlList) {
+/* 132 */     this.urlList = urlList;
+/*     */   }
+/*     */ }
+
+
+/* Location:              D:\GitHub\LeechText\tools\LeechText.jar!\dark\leech\text\models\Properties.class
+ * Java compiler version: 7 (51.0)
+ * JD-Core Version:       1.1.3
  */
-
-import java.util.ArrayList;
-import java.util.List;
-
-public class Properties {
-    private String name; //Tên truyện
-    private String author; //Tác giả
-    private String url; //Đường dẩn truyện
-    private String cover; //Đường dẫn Cover
-    private List<Chapter> chapList; //Danh sách chương
-    private List<Pager> pageList; //Danh sách trang
-    private boolean forum; //Trang get có phải forum hay không
-    private int size; //Số chương
-    private String savePath; //Thư mục lưu
-    private String gioiThieu;
-    private boolean addGt;
-    private String charset = "UTF-8";
-    private String[] urlList;
-
-    public boolean isAddGt() {
-        return addGt;
-    }
-
-    public void setAddGt(boolean addGt) {
-        this.addGt = addGt;
-    }
-
-    public String getGioiThieu() {
-        return gioiThieu;
-    }
-
-    public void setGioiThieu(String gioiThieu) {
-        this.gioiThieu = gioiThieu;
-    }
-
-    public String getSavePath() {
-        return savePath;
-    }
-
-    public void setSavePath(String savePath) {
-        this.savePath = savePath;
-    }
-
-    public int getSize() {
-        return size;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getCover() {
-        return cover;
-    }
-
-    public void setCover(String cover) {
-        this.cover = cover;
-    }
-
-    public void setCover(String cover, String page) {
-        if (cover == null) return;
-        if (cover.startsWith("http"))
-            this.cover = cover;
-        else this.cover = page + cover;
-    }
-
-    public boolean isForum() {
-        return forum;
-    }
-
-    public void setForum(boolean forum) {
-        this.forum = forum;
-    }
-
-    public List<Chapter> getChapList() {
-        return chapList;
-    }
-
-    public void setChapList(List<Chapter> chapList) {
-        this.chapList = chapList;
-    }
-
-    public List<Pager> getPageList() {
-        return pageList;
-    }
-
-    public void setPageList(List<Pager> pageList) {
-        this.pageList = pageList;
-    }
-
-    public String getCharset() {
-        return charset;
-    }
-
-    public void setCharset(String charset) {
-        this.charset = charset;
-    }
-
-    public String[] getUrlList() {
-        return urlList;
-    }
-
-    public void setUrlList(String[] urlList) {
-        this.urlList = urlList;
-    }
-}

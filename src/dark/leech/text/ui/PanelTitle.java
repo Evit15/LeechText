@@ -1,38 +1,44 @@
-package dark.leech.text.ui;
+/*    */ package dark.leech.text.ui;
+/*    */ 
+/*    */ import dark.leech.text.ui.button.CloseButton;
+/*    */ import dark.leech.text.util.ColorUtils;
+/*    */ import dark.leech.text.util.FontUtils;
+/*    */ import java.awt.Color;
+/*    */ import java.awt.Component;
+/*    */ import java.awt.LayoutManager;
+/*    */ import java.awt.event.ActionListener;
+/*    */ import javax.swing.JLabel;
+/*    */ import javax.swing.JPanel;
+/*    */ 
+/*    */ public class PanelTitle
+/*    */   extends JPanel {
+/* 15 */   JLabel lbTitle = new JLabel();
+/* 16 */   CloseButton btClose = new CloseButton();
+/*    */   
+/*    */   public void setText(String text) {
+/* 19 */     this.lbTitle.setText(text);
+/*    */   }
+/*    */   
+/*    */   public void addCloseListener(ActionListener actionListener) {
+/* 23 */     this.btClose.addActionListener(actionListener);
+/*    */   }
+/*    */ 
+/*    */   
+/*    */   public void setBounds(int x, int y, int width, int height) {
+/* 28 */     super.setBounds(x, y, width, height);
+/* 29 */     setBackground(ColorUtils.THEME_COLOR);
+/* 30 */     setLayout((LayoutManager)null);
+/* 31 */     this.lbTitle.setFont(FontUtils.TITLE_NORMAL);
+/* 32 */     this.lbTitle.setForeground(Color.WHITE);
+/* 33 */     add(this.lbTitle);
+/* 34 */     this.lbTitle.setBounds(20, 0, width - 60, height);
+/* 35 */     add((Component)this.btClose);
+/* 36 */     this.btClose.setBounds(width - 35, 10, height - 20, height - 20);
+/*    */   }
+/*    */ }
 
-import dark.leech.text.util.ColorUtils;
-import dark.leech.text.util.FontUtils;
-import dark.leech.text.ui.button.CloseButton;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionListener;
-
-/**
- * Created by Long on 1/3/2017.
+/* Location:              D:\GitHub\LeechText\tools\LeechText.jar!\dark\leech\tex\\ui\PanelTitle.class
+ * Java compiler version: 7 (51.0)
+ * JD-Core Version:       1.1.3
  */
-public class PanelTitle extends JPanel {
-    JLabel lbTitle = new JLabel();
-    CloseButton btClose = new CloseButton();
-
-    public void setText(String text) {
-        lbTitle.setText(text);
-    }
-
-    public void addCloseListener(ActionListener actionListener) {
-        btClose.addActionListener(actionListener);
-    }
-
-    @Override
-    public void setBounds(int x, int y, int width, int height) {
-        super.setBounds(x, y, width, height);
-        this.setBackground(ColorUtils.THEME_COLOR);
-        this.setLayout(null);
-        lbTitle.setFont(FontUtils.TITLE_NORMAL);
-        lbTitle.setForeground(Color.WHITE);
-        this.add(lbTitle);
-        lbTitle.setBounds(20, 0, width - 60, height);
-        this.add(btClose);
-        btClose.setBounds(width - 35, 10, height - 10 * 2, height - 10 * 2);
-    }
-}

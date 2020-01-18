@@ -1,212 +1,217 @@
-package dark.leech.text.ui.main.export.config;
+/*     */ package dark.leech.text.ui.main.export.config;
+/*     */ 
+/*     */ import dark.leech.text.action.Config;
+/*     */ import dark.leech.text.action.History;
+/*     */ import dark.leech.text.listeners.BlurListener;
+/*     */ import dark.leech.text.listeners.ChangeListener;
+/*     */ import dark.leech.text.models.Chapter;
+/*     */ import dark.leech.text.models.Properties;
+/*     */ import dark.leech.text.ui.PanelTitle;
+/*     */ import dark.leech.text.ui.button.BasicButton;
+/*     */ import dark.leech.text.ui.material.JMDialog;
+/*     */ import dark.leech.text.util.FontUtils;
+/*     */ import java.awt.Component;
+/*     */ import java.awt.event.ActionEvent;
+/*     */ import java.awt.event.ActionListener;
+/*     */ import java.util.List;
+/*     */ import javax.swing.JLabel;
+/*     */ 
+/*     */ public class ConfigUI
+/*     */   extends JMDialog implements ChangeListener {
+/*     */   public static final int NAME = 0;
+/*     */   public static final int IMG = 1;
+/*     */   public static final int ERROR = 2;
+/*     */   public static final int OPTIMIZE = 3;
+/*     */   private PanelTitle pnTitle;
+/*     */   private BasicButton btOk;
+/*     */   private JLabel lbName;
+/*     */   private JLabel lbImg;
+/*     */   private JLabel lbError;
+/*     */   private BasicButton btName;
+/*     */   private BasicButton btError;
+/*     */   private BasicButton btImg;
+/*     */   private BasicButton btList;
+/*     */   protected Properties properties;
+/*     */   private List<Chapter> chapList;
+/*     */   private Config config;
+/*     */   private List<Chapter> nameList;
+/*     */   private List<Chapter> imgList;
+/*     */   private List<Chapter> errorList;
+/*     */   
+/*     */   public ConfigUI(Properties properties) {
+/*  42 */     this.properties = properties;
+/*  43 */     this.chapList = properties.getChapList();
+/*  44 */     setSize(295, 260);
+/*  45 */     runOnUiThread(new Runnable()
+/*     */         {
+/*     */           public void run() {
+/*  48 */             ConfigUI.this.onCreate();
+/*  49 */             ConfigUI.this.loadErr();
+/*     */           }
+/*     */         });
+/*     */   }
+/*     */ 
+/*     */ 
+/*     */   
+/*     */   protected void onCreate() {
+/*  57 */     super.onCreate();
+/*  58 */     this.pnTitle = new PanelTitle();
+/*  59 */     this.btOk = new BasicButton();
+/*  60 */     this.lbName = new JLabel();
+/*  61 */     this.lbImg = new JLabel();
+/*  62 */     this.lbError = new JLabel();
+/*  63 */     this.btName = new BasicButton();
+/*  64 */     this.btError = new BasicButton();
+/*  65 */     this.btImg = new BasicButton();
+/*  66 */     this.btList = new BasicButton();
+/*     */ 
+/*     */ 
+/*     */ 
+/*     */     
+/*  71 */     this.pnTitle.setText("Hiệu Chỉnh");
+/*  72 */     this.pnTitle.addCloseListener(new ActionListener()
+/*     */         {
+/*     */           public void actionPerformed(ActionEvent e) {
+/*  75 */             ConfigUI.this.close();
+/*     */           }
+/*     */         });
+/*  78 */     this.container.add((Component)this.pnTitle);
+/*  79 */     this.pnTitle.setBounds(0, 0, 295, 45);
+/*     */ 
+/*     */     
+/*  82 */     this.btOk.setText("Hoàn Tất");
+/*  83 */     this.btOk.addActionListener(new ActionListener()
+/*     */         {
+/*     */           public void actionPerformed(ActionEvent e) {
+/*  86 */             ConfigUI.this.saveProperties();
+/*  87 */             ConfigUI.this.close();
+/*     */           }
+/*     */         });
+/*  90 */     this.container.add((Component)this.btOk);
+/*  91 */     this.btOk.setBounds(170, 210, 100, 35);
+/*     */ 
+/*     */     
+/*  94 */     this.btList.setText("Xem DS");
+/*  95 */     this.btList.addActionListener(new ActionListener()
+/*     */         {
+/*     */           public void actionPerformed(ActionEvent e) {
+/*  98 */             ConfigUI.this.Optimize();
+/*     */           }
+/*     */         });
+/* 101 */     this.container.add((Component)this.btList);
+/* 102 */     this.btList.setBounds(10, 210, 100, 35);
+/*     */ 
+/*     */     
+/* 105 */     this.lbName.setFont(FontUtils.TEXT_NORMAL);
+/* 106 */     this.container.add(this.lbName);
+/* 107 */     this.lbName.setBounds(10, 60, 175, 35);
+/*     */ 
+/*     */     
+/* 110 */     this.lbImg.setFont(FontUtils.TEXT_NORMAL);
+/* 111 */     this.container.add(this.lbImg);
+/* 112 */     this.lbImg.setBounds(10, 105, 175, 35);
+/*     */ 
+/*     */     
+/* 115 */     this.lbError.setFont(FontUtils.TEXT_NORMAL);
+/* 116 */     this.container.add(this.lbError);
+/* 117 */     this.lbError.setBounds(10, 150, 175, 35);
+/*     */ 
+/*     */     
+/* 120 */     this.btName.setText("H.Chỉnh");
+/* 121 */     this.btName.addActionListener(new ActionListener()
+/*     */         {
+/*     */           public void actionPerformed(ActionEvent e) {
+/* 124 */             ConfigUI.this.editName();
+/*     */           }
+/*     */         });
+/* 127 */     this.container.add((Component)this.btName);
+/* 128 */     this.btName.setBounds(185, 60, 95, 35);
+/*     */ 
+/*     */     
+/* 131 */     this.btError.setText("H.Chỉnh");
+/* 132 */     this.btError.addActionListener(new ActionListener()
+/*     */         {
+/*     */           public void actionPerformed(ActionEvent e) {
+/* 135 */             ConfigUI.this.editError();
+/*     */           }
+/*     */         });
+/* 138 */     this.container.add((Component)this.btError);
+/* 139 */     this.btError.setBounds(185, 150, 95, 35);
+/*     */ 
+/*     */     
+/* 142 */     this.btImg.setText("H.Chỉnh");
+/* 143 */     this.btImg.addActionListener(new ActionListener()
+/*     */         {
+/*     */           public void actionPerformed(ActionEvent e) {
+/* 146 */             ConfigUI.this.editImg();
+/*     */           }
+/*     */         });
+/* 149 */     this.container.add((Component)this.btImg);
+/* 150 */     this.btImg.setBounds(185, 105, 95, 35);
+/*     */   }
+/*     */ 
+/*     */ 
+/*     */   
+/*     */   private void loadErr() {
+/* 156 */     this.config = new Config(this.chapList);
+/* 157 */     this.nameList = this.config.checkName();
+/* 158 */     this.lbName.setText("Tên chương: " + Integer.toString(this.nameList.size()) + " không hợp lệ");
+/* 159 */     if (this.nameList.size() == 0) {
+/* 160 */       this.btName.setVisible(false);
+/*     */     }
+/* 162 */     this.imgList = this.config.checkImg();
+/* 163 */     this.lbImg.setText("Chương ảnh: " + Integer.toString(this.imgList.size()) + " chương");
+/* 164 */     if (this.imgList.size() == 0) {
+/* 165 */       this.btImg.setVisible(false);
+/*     */     }
+/* 167 */     this.errorList = this.config.checkError();
+/* 168 */     this.lbError.setText("Chương lỗi: " + Integer.toString(this.errorList.size()) + " chương");
+/* 169 */     if (this.errorList.size() == 0)
+/* 170 */       this.btError.setVisible(false); 
+/*     */   }
+/*     */   
+/*     */   private void editName() {
+/* 174 */     ListUI listName = new ListUI(this.nameList, "Tên chương không hợp lệ", this.properties.getSavePath());
+/* 175 */     listName.setBlurListener((BlurListener)this);
+/* 176 */     listName.setAction(0);
+/* 177 */     listName.open();
+/*     */   }
+/*     */   
+/*     */   private void editImg() {
+/* 181 */     ListUI listImg = new ListUI(this.imgList, "Chương ảnh", this.properties.getSavePath());
+/* 182 */     listImg.setBlurListener((BlurListener)this);
+/* 183 */     listImg.setAction(1);
+/* 184 */     listImg.open();
+/*     */   }
+/*     */   
+/*     */   private void editError() {
+/* 188 */     ListUI listError = new ListUI(this.errorList, "Chương lỗi", this.properties.getSavePath());
+/* 189 */     listError.setBlurListener((BlurListener)this);
+/* 190 */     listError.setProperties(this.properties);
+/* 191 */     listError.setAction(2);
+/* 192 */     listError.open();
+/*     */   }
+/*     */   
+/*     */   private void Optimize() {
+/* 196 */     ListUI list = new ListUI(this.chapList, "Danh sách chương", this.properties.getSavePath());
+/* 197 */     list.setBlurListener((BlurListener)this);
+/* 198 */     list.setAction(3);
+/* 199 */     list.open();
+/*     */   }
+/*     */   
+/*     */   private void saveProperties() {
+/* 203 */     this.properties.setSize(this.chapList.size());
+/* 204 */     History.getHistory().save(this.properties);
+/*     */   }
+/*     */ 
+/*     */   
+/*     */   public void doChanger() {
+/* 209 */     repaint();
+/*     */   }
+/*     */ }
 
-import dark.leech.text.action.Config;
-import dark.leech.text.action.History;
-import dark.leech.text.listeners.ChangeListener;
-import dark.leech.text.models.Chapter;
-import dark.leech.text.models.Properties;
-import dark.leech.text.ui.PanelTitle;
-import dark.leech.text.ui.button.BasicButton;
-import dark.leech.text.ui.material.JMDialog;
-import dark.leech.text.util.FontUtils;
 
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
-
-/**
- * Created by Long on 9/10/2016.
+/* Location:              D:\GitHub\LeechText\tools\LeechText.jar!\dark\leech\tex\\ui\main\export\config\ConfigUI.class
+ * Java compiler version: 7 (51.0)
+ * JD-Core Version:       1.1.3
  */
-public class ConfigUI extends JMDialog implements ChangeListener {
-
-    public static final int NAME = 0, IMG = 1, ERROR = 2, OPTIMIZE = 3;
-    private PanelTitle pnTitle;
-    private BasicButton btOk;
-    private JLabel lbName;
-    private JLabel lbImg;
-    private JLabel lbError;
-    private BasicButton btName;
-    private BasicButton btError;
-    private BasicButton btImg;
-    private BasicButton btList;
-    protected Properties properties;
-    private List<Chapter> chapList;
-    private Config config;
-    private List<Chapter> nameList;
-    private List<Chapter> imgList;
-    private List<Chapter> errorList;
-
-    public ConfigUI(Properties properties) {
-        this.properties = properties;
-        this.chapList = properties.getChapList();
-        setSize(295, 260);
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                onCreate();
-                loadErr();
-            }
-        });
-
-    }
-
-    @Override
-    protected void onCreate() {
-        super.onCreate();
-        pnTitle = new PanelTitle();
-        btOk = new BasicButton();
-        lbName = new JLabel();
-        lbImg = new JLabel();
-        lbError = new JLabel();
-        btName = new BasicButton();
-        btError = new BasicButton();
-        btImg = new BasicButton();
-        btList = new BasicButton();
-
-
-        //======== pnTitle ========
-
-        pnTitle.setText("Hiệu Chỉnh");
-        pnTitle.addCloseListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                close();
-            }
-        });
-        container.add(pnTitle);
-        pnTitle.setBounds(0, 0, 295, 45);
-
-        //---- btOk ----
-        btOk.setText("Hoàn Tất");
-        btOk.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                saveProperties();
-                close();
-            }
-        });
-        container.add(btOk);
-        btOk.setBounds(170, 210, 100, 35);
-
-        //
-        btList.setText("Xem DS");
-        btList.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Optimize();
-            }
-        });
-        container.add(btList);
-        btList.setBounds(10, 210, 100, 35);
-        //---- lbName ----
-
-        lbName.setFont(FontUtils.TEXT_NORMAL);
-        container.add(lbName);
-        lbName.setBounds(10, 60, 175, 35);
-
-        //---- lbImg ----
-        lbImg.setFont(FontUtils.TEXT_NORMAL);
-        container.add(lbImg);
-        lbImg.setBounds(10, 105, 175, 35);
-
-        //---- lbError ----
-        lbError.setFont(FontUtils.TEXT_NORMAL);
-        container.add(lbError);
-        lbError.setBounds(10, 150, 175, 35);
-
-        //---- btName ----
-        btName.setText("H.Chỉnh");
-        btName.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                editName();
-            }
-        });
-        container.add(btName);
-        btName.setBounds(185, 60, 95, 35);
-
-        //---- btError ----
-        btError.setText("H.Chỉnh");
-        btError.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                editError();
-            }
-        });
-        container.add(btError);
-        btError.setBounds(185, 150, 95, 35);
-
-        //---- btImg ----
-        btImg.setText("H.Chỉnh");
-        btImg.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                editImg();
-            }
-        });
-        container.add(btImg);
-        btImg.setBounds(185, 105, 95, 35);
-
-
-    }
-
-    private void loadErr() {
-        config = new Config(chapList);
-        nameList = config.checkName();
-        lbName.setText("Tên chương: " + Integer.toString(nameList.size()) + " không hợp lệ");
-        if (nameList.size() == 0)
-            btName.setVisible(false);
-
-        imgList = config.checkImg();
-        lbImg.setText("Chương ảnh: " + Integer.toString(imgList.size()) + " chương");
-        if (imgList.size() == 0)
-            btImg.setVisible(false);
-
-        errorList = config.checkError();
-        lbError.setText("Chương lỗi: " + Integer.toString(errorList.size()) + " chương");
-        if (errorList.size() == 0)
-            btError.setVisible(false);
-    }
-
-    private void editName() {
-        ListUI listName = new ListUI(nameList, "Tên chương không hợp lệ", properties.getSavePath());
-        listName.setBlurListener(this);
-        listName.setAction(NAME);
-        listName.open();
-    }
-
-    private void editImg() {
-        ListUI listImg = new ListUI(imgList, "Chương ảnh", properties.getSavePath());
-        listImg.setBlurListener(this);
-        listImg.setAction(IMG);
-        listImg.open();
-    }
-
-    private void editError() {
-        ListUI listError = new ListUI(errorList, "Chương lỗi", properties.getSavePath());
-        listError.setBlurListener(this);
-        listError.setProperties(properties);
-        listError.setAction(ERROR);
-        listError.open();
-    }
-
-    private void Optimize() {
-        ListUI list = new ListUI(chapList, "Danh sách chương", properties.getSavePath());
-        list.setBlurListener(this);
-        list.setAction(OPTIMIZE);
-        list.open();
-    }
-
-    private void saveProperties() {
-        properties.setSize(chapList.size());
-        History.getHistory().save(properties);
-    }
-
-    @Override
-    public void doChanger() {
-        repaint();
-    }
-}
-

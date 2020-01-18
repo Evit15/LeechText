@@ -1,8 +1,11 @@
 package dark.leech.text.listeners;
 
-/**
- * Created by Long on 9/11/2016.
- */
 public interface ChangeListener {
-    public void doChanger();
+  void doChanger();
 }
+
+
+/* Location:              D:\GitHub\LeechText\tools\LeechText.jar!\dark\leech\text\listeners\ChangeListener.class
+ * Java compiler version: 7 (51.0)
+ * JD-Core Version:       1.1.3
+ */

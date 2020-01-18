@@ -1,8 +1,11 @@
 package dark.leech.text.listeners;
 
-/**
- * Created by Long on 9/8/2016.
- */
 public interface ProgressListener {
-    void setProgress(int value, String string);
+  void setProgress(int paramInt, String paramString);
 }
+
+
+/* Location:              D:\GitHub\LeechText\tools\LeechText.jar!\dark\leech\text\listeners\ProgressListener.class
+ * Java compiler version: 7 (51.0)
+ * JD-Core Version:       1.1.3
+ */

@@ -1,136 +1,43 @@
-package dark.leech.text.ui;
+/*    */ package dark.leech.text.ui;
+/*    */ 
+/*    */ import java.awt.Dimension;
+/*    */ import javax.swing.JLayer;
+/*    */ import javax.swing.JPanel;
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ 
+/*    */ public class CircleWait
+/*    */ {
+/*    */   private JLayer<JPanel> jlayer;
+/* 17 */   WaitLayerUI layerUI = new WaitLayerUI();
+/*    */   
+/*    */   public CircleWait(Dimension dimension) {
+/* 20 */     JPanel pn = new JPanel();
+/* 21 */     pn.setOpaque(false);
+/* 22 */     pn.setPreferredSize(dimension);
+/* 23 */     this.jlayer = new JLayer<>(pn, this.layerUI);
+/*    */   }
+/*    */   
+/*    */   public JLayer<JPanel> getJlayer() {
+/* 27 */     return this.jlayer;
+/*    */   }
+/*    */   
+/*    */   public void startWait() {
+/* 31 */     this.layerUI.start();
+/*    */   }
+/*    */   
+/*    */   public void stopWait() {
+/* 35 */     this.layerUI.stop();
+/*    */   }
+/*    */ }
 
-import dark.leech.text.util.ColorUtils;
 
-import javax.swing.*;
-import javax.swing.plaf.LayerUI;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.beans.PropertyChangeEvent;
-
-/**
- * Created by Long on 10/9/2016.
+/* Location:              D:\GitHub\LeechText\tools\LeechText.jar!\dark\leech\tex\\ui\CircleWait.class
+ * Java compiler version: 7 (51.0)
+ * JD-Core Version:       1.1.3
  */
-public class CircleWait {
-    private JLayer<JPanel> jlayer;
-    WaitLayerUI layerUI = new WaitLayerUI();
-
-    public CircleWait(Dimension dimension) {
-        JPanel pn = new JPanel();
-        pn.setOpaque(false);
-        pn.setPreferredSize(dimension);
-        jlayer = new JLayer<JPanel>(pn, layerUI);
-    }
-
-    public JLayer<JPanel> getJlayer() {
-        return jlayer;
-    }
-
-    public void startWait() {
-        layerUI.start();
-    }
-
-    public void stopWait() {
-        layerUI.stop();
-    }
-}
-
-class WaitLayerUI extends LayerUI<JPanel> implements ActionListener {
-    private boolean mIsRunning;
-    private boolean mIsFadingOut;
-    private Timer mTimer;
-
-    private int mAngle;
-    private int mFadeCount;
-    private int mFadeLimit = 15;
-
-    @Override
-    public void paint(Graphics g, JComponent c) {
-        int w = c.getWidth();
-        int h = c.getHeight();
-
-        // Paint the view.
-        super.paint(g, c);
-
-        if (!mIsRunning) {
-            return;
-        }
-
-        Graphics2D g2 = (Graphics2D) g.create();
-
-        float fade = (float) mFadeCount / (float) mFadeLimit;
-        // Gray it out.
-        Composite urComposite = g2.getComposite();
-
-        g2.setComposite(AlphaComposite.getInstance(
-                AlphaComposite.SRC_OVER, .5f * fade < 0 ? 0 : .5f * fade));
-        g2.setColor(new Color(0, 0, 0, 30));
-        g2.fillRect(0, 0, w, h);
-        g2.setComposite(urComposite);
-
-        // Paint the wait indicator.
-        int s = Math.min(w, h) / 5;
-        int cx = w / 2;
-        int cy = h / 2;
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-                RenderingHints.VALUE_ANTIALIAS_ON);
-        g2.setStroke(
-                new BasicStroke(s / 4, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
-        g2.setPaint(ColorUtils.THEME_COLOR);
-        g2.rotate(Math.PI * mAngle / 180, cx, cy);
-        for (int i = 0; i < 12; i++) {
-            float scale = (11.0f - (float) i) / 11.0f;
-            g2.drawLine(cx + s, cy, cx + s * 2, cy);
-            g2.rotate(-Math.PI / 6, cx, cy);
-            g2.setComposite(AlphaComposite.getInstance(
-                    AlphaComposite.SRC_OVER, scale * fade < 0 ? 0 : scale * fade));
-        }
-
-        g2.dispose();
-    }
-
-    public void actionPerformed(ActionEvent e) {
-        if (mIsRunning) {
-            firePropertyChange("tick", 0, 1);
-            mAngle += 3;
-            if (mAngle >= 360) {
-                mAngle = 0;
-            }
-            if (mIsFadingOut) {
-                if (--mFadeCount == 0) {
-                    mIsRunning = false;
-                    mTimer.stop();
-                }
-            } else if (mFadeCount < mFadeLimit) {
-                mFadeCount++;
-            }
-        }
-    }
-
-    public void start() {
-        if (mIsRunning) {
-            return;
-        }
-
-        // Run a thread for animation.
-        mIsRunning = true;
-        mIsFadingOut = false;
-        mFadeCount = 0;
-        int fps = 30;
-        int tick = 1000 / fps;
-        mTimer = new Timer(tick, this);
-        mTimer.start();
-    }
-
-    public void stop() {
-        mIsFadingOut = true;
-    }
-
-    @Override
-    public void applyPropertyChange(PropertyChangeEvent pce, JLayer l) {
-        if ("tick".equals(pce.getPropertyName())) {
-            l.repaint();
-        }
-    }
-}
