@@ -218,9 +218,13 @@
 				  if(img.contains("?")) {
 					  img = img.substring(0, img.lastIndexOf("?"));
 				  }
-/* 216 */         text = text.replace(imgPath, "../Images/" + chapter.getId() + "_" + Integer.toString(i) + img).replace("\">", "\"/>");
 /* 217 */         img = this.path + "/data/Images/" + chapter.getId() + "_" + Integer.toString(i) + img;
 /* 218 */         FileUtils.url2file(imgList.get(i), img);
+				  if(FileUtils.fileExist(img)) {
+					  text = text.replace(imgPath, "../Images/" + chapter.getId() + "_" + Integer.toString(i) + img).replace("\">", "\"/>");  
+				  }else {
+					  chapter.setDownloadImgSucess(false);
+				  }
 /*     */       } 
 /* 220 */     }  FileUtils.string2file(text, this.path + "/raw/" + chapter.getId() + ".txt");
 /*     */   }

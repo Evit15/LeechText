@@ -11,6 +11,7 @@
 /*     */   private boolean imageChapter;
 /*     */   private String id;
 /*     */   private boolean purchase;
+			private boolean downloadImgSucess = true;
 /*     */   
 /*     */   public Chapter() {
 /*  16 */     this("");
@@ -125,7 +126,13 @@
 /*     */   public void setEmpty(boolean empty) {
 /* 126 */     this.empty = empty;
 /*     */   }
-/*     */ }
+/*     */
+public boolean isDownloadImgSucess() {
+	return downloadImgSucess;
+}
+public void setDownloadImgSucess(boolean downloadImgSucess) {
+	this.downloadImgSucess = downloadImgSucess;
+} }
 
 
 /* Location:              D:\GitHub\LeechText\tools\LeechText.jar!\dark\leech\text\models\Chapter.class

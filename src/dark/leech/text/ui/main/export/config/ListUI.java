@@ -466,8 +466,13 @@ import java.net.URL;
 /*     */ 
 /*     */   
 /*     */   public void updateData(int row, Chapter chapter) {
-/* 462 */     if (this.tableList.getCellEditor() != null) this.tableList.getCellEditor().stopCellEditing(); 
-/* 463 */     this.tableModel.setValueAt("Ok", row, 0);
+/* 462 */     if (this.tableList.getCellEditor() != null) this.tableList.getCellEditor().stopCellEditing();
+			  if(chapter.isDownloadImgSucess()) {
+				  this.tableModel.setValueAt("Ok", row, 0);
+			  }else {
+				  this.tableModel.setValueAt("Fail", row, 0);
+			  }
+/* 463 */     
 /* 464 */     this.tableModel.setValueAt(chapter.getPartName(), row, 1);
 /* 465 */     this.tableModel.setValueAt(chapter.getChapName(), row, 2);
 /* 466 */     this.tableModel.fireTableCellUpdated(row, 0);

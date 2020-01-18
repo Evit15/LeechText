@@ -193,6 +193,15 @@
 /* 193 */         f.delete(); 
 /* 194 */     } catch (Exception exception) {}
 /*     */   }
+/*     */   public static boolean fileExist(String path) {
+				boolean isExist = false;
+/*     */     try {
+/* 191 */       File f = new File(validate(path));
+/* 192 */       if (f.exists() && !f.isDirectory())
+/* 193 */         isExist = true; 
+/* 194 */     } catch (Exception exception) {}
+				return isExist;
+/*     */   }
 /*     */ 
 /*     */   
 /*     */   public static synchronized String validate(String path) {
